@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import org.fxmisc.richtext.CodeArea?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enigma.EnigmaUIController">
+   <children>
+      <CodeArea layoutX="10.0" layoutY="8.0" prefHeight="553.0" prefWidth="781.0" />
+   </children>
+</AnchorPane>
