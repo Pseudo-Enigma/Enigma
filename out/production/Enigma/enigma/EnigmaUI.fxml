@@ -18,80 +18,58 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enigma.EnigmaUIController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Open" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+       <MenuBar BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem mnemonicParsing="false" text="New"/>
+               <MenuItem mnemonicParsing="false" text="Open"/>
+               <MenuItem mnemonicParsing="false" text="Save"/>
+               <SeparatorMenuItem mnemonicParsing="false"/>
+               <MenuItem mnemonicParsing="false" text="Close"/>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Help">
+               <MenuItem mnemonicParsing="false" text="About"/>
+           </Menu>
+       </MenuBar>
    </top>
    <center>
-      <TabPane prefHeight="572.0" prefWidth="537.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Untitled Tab 1">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <CodeArea prefHeight="543.0" prefWidth="665.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Untitled Tab 2">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+       <TabPane prefHeight="572.0" prefWidth="537.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+           <Tab text="Untitled Tab 1">
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                   <CodeArea prefHeight="543.0" prefWidth="665.0"/>
+               </AnchorPane>
+           </Tab>
+           <Tab text="Untitled Tab 2">
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+           </Tab>
+       </TabPane>
    </center>
    <left>
-      <HBox prefHeight="572.0" prefWidth="134.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox prefHeight="572.0" prefWidth="218.0">
-               <children>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="107.0" prefWidth="156.0">
-                     <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/icons/documents.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="107.0" prefWidth="156.0">
-                     <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/icons/search-interface-symbol.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" prefHeight="107.0" prefWidth="156.0">
-                     <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/icons/play-button.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
+       <HBox prefHeight="572.0" prefWidth="134.0" BorderPane.alignment="CENTER">
+           <VBox prefHeight="572.0" prefWidth="218.0">
+               <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="107.0" prefWidth="156.0">
+                   <graphic>
+                       <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../resources/icons/documents.png"/>
+                       </ImageView>
+                   </graphic>
+               </Button>
+               <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
+                       prefHeight="107.0" prefWidth="156.0">
+                   <graphic>
+                       <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../resources/icons/search-interface-symbol.png"/>
+                       </ImageView>
+                   </graphic>
+               </Button>
+               <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="118.0" mnemonicParsing="false"
+                       prefHeight="107.0" prefWidth="156.0">
+                   <graphic>
+                       <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../resources/icons/play-button.png"/>
+                       </ImageView>
+                   </graphic>
+               </Button>
+           </VBox>
+       </HBox>
    </left>
 </BorderPane>

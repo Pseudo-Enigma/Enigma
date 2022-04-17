@@ -9,6 +9,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="richtextfx-fat-0.10.7" level="project" />
+    <orderEntry type="library" name="fxmisc.flowless" level="project" />
+    <orderEntry type="library" name="fxmisc.richtext.richtextfx1" level="project" />
+    <orderEntry type="library" name="commons.codec" level="project" />
+    <orderEntry type="library" name="mysql.connector.java" level="project" />
   </component>
 </module>

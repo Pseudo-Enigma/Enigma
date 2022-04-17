@@ -46,7 +46,7 @@
                      <graphic>
                         <ImageView fx:id="fileButton" fitHeight="34.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/icons/documents.png" />
+                              <Image url="@../icons/documents.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
@@ -54,7 +54,7 @@
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/icons/search-interface-symbol.png" />
+                              <Image url="@../icons/search-interface-symbol.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
@@ -62,7 +62,7 @@
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/icons/play-button.png" />
+                              <Image url="@../icons/play-button.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
