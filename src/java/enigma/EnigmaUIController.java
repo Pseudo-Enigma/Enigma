@@ -6,6 +6,7 @@ import org.fxmisc.richtext.CodeArea;
 public class EnigmaUIController {
 
     @FXML
-    private CodeArea y;
+    private CodeArea editor;
+
 
 }
