@@ -37,7 +37,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("EnigmaUI.fxml"));
         primaryStage.setTitle("Enigma");
-        primaryStage.setScene(new Scene(root, 801, 570));
+        Scene scene = new Scene(root, 800, 600);
+        scene.getStylesheets().add(Main.class.getResource("java-keywords.css").toExternalForm());
+        primaryStage.setScene(scene);
+
         primaryStage.show();
     }
     
