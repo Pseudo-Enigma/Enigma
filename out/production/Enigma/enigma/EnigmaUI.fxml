@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -15,8 +14,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enigma.EnigmaUIController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enigma.EnigmaUIController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -43,22 +43,31 @@
          <tabs>
             <Tab fx:id="welcome" text="Welcome">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="295.0" fitWidth="190.0" layoutX="107.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="191.96799896620848" AnchorPane.topAnchor="190.02558373888803">
-                           <image>
-                              <Image url="@../../resources/icons/Enigma_Logo_Black.jpg" />
-                           </image>
-                        </ImageView>
-                        <Label alignment="CENTER" layoutX="333.0" layoutY="119.0" prefHeight="71.0" prefWidth="278.0" text="Start Developing!" AnchorPane.bottomAnchor="350.76234322219443" AnchorPane.topAnchor="119.0">
-                           <font>
-                              <Font name="Monospaced Italic" size="19.0" />
-                           </font>
-                        </Label>
-                        <Button layoutX="367.0" layoutY="191.0" mnemonicParsing="false" onAction="#newFile" prefHeight="69.0" prefWidth="203.0" text="New File" AnchorPane.leftAnchor="367.0" AnchorPane.rightAnchor="95.78073727197082" />
-                        <Button layoutX="367.0" layoutY="271.0" mnemonicParsing="false" onAction="#openFile" prefHeight="69.0" prefWidth="203.0" text="Open File" AnchorPane.leftAnchor="367.0" AnchorPane.rightAnchor="95.78073727197082" />
-                     </children>
-                  </AnchorPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <AnchorPane prefHeight="542.0" prefWidth="308.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ImageView fx:id="logo_blue" fitHeight="223.0" fitWidth="224.0" layoutX="42.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/logo_blue.png" />
+                                 </image></ImageView>
+                           </children>
+                        </AnchorPane>
+                     </left>
+                     <right>
+                        <AnchorPane prefHeight="542.0" prefWidth="610.0" style="-fx-background-color: #286090;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button layoutX="121.0" layoutY="237.0" mnemonicParsing="false" onAction="#newFile" prefHeight="49.0" prefWidth="129.0" text="New File" textAlignment="CENTER" />
+                              <Text fill="WHITE" layoutX="59.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Developing!" textAlignment="CENTER" wrappingWidth="253.0">
+                                 <font>
+                                    <Font name="System Bold" size="29.0" />
+                                 </font>
+                              </Text>
+                              <Button layoutX="121.0" layoutY="311.0" mnemonicParsing="false" onAction="#openFile" prefHeight="49.0" prefWidth="129.0" text="Open File" textAlignment="CENTER" />
+                           </children>
+                        </AnchorPane>
+                     </right>
+                  </BorderPane>
                </content>
             </Tab>
          </tabs>
@@ -71,31 +80,39 @@
                <children>
                   <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="107.0" prefWidth="156.0">
                      <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="icon_file" fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/icons/documents.png" />
+                              <Image url="@icons/icon_file.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                   <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="107.0" prefWidth="156.0">
                      <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="icon_search" fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/icons/search-interface-symbol.png" />
+                              <Image url="@icons/icon_search.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                   <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onAction="#compile" prefHeight="107.0" prefWidth="156.0">
                      <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="icon_run" fitHeight="57.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/icons/play-button.png" />
+                              <Image url="@icons/icon_run.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Button fx:id="btn_profile" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="224.0" mnemonicParsing="false" onAction="#profileOnAction" prefHeight="107.0" prefWidth="156.0">
+                     <graphic>
+                        <ImageView fx:id="icon_profile" fitHeight="64.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icon_profile.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </VBox>
          </children>

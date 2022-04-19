@@ -1,0 +1,13 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+#codeArea .text{
+	-fx-fill: white;
+}
+
+#codeArea .keyword{
+	-fx-fill: blue;
+}
+
+#codeArea .operator{
+	-fx-fill: purple;
+}

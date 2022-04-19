@@ -3,8 +3,15 @@ package enigma;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
@@ -13,19 +20,55 @@ import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EnigmaUIController {
-
+public class EnigmaUIController implements Initializable {
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     @FXML
     private TabPane tabPane;
     @FXML
     private Tab welcome;
+    @FXML
+    public ImageView icon_file;
+    @FXML
+    public ImageView icon_search;
+    @FXML
+    public ImageView icon_run;
+    @FXML
+    public ImageView icon_profile;
+    @FXML
+    public ImageView logo_blue;
 
     ArrayList<File> fileList = new ArrayList<>();
+
+    public void initialize (URL url, ResourceBundle resourceBundle) {
+        File brandingFile = new File ("src/resources/icons/icon_file.png");
+        Image brandingImage = new Image(brandingFile.toURI().toString());
+        icon_file.setImage(brandingImage);
+
+        brandingFile = new File ("src/resources/icons/icon_search.png");
+        brandingImage = new Image(brandingFile.toURI().toString());
+        icon_search.setImage(brandingImage);
+
+        brandingFile = new File ("src/resources/icons/icon_run.png");
+        brandingImage = new Image(brandingFile.toURI().toString());
+        icon_run.setImage(brandingImage);
+
+        brandingFile = new File ("src/resources/icons/icon_profile.png");
+        brandingImage = new Image(brandingFile.toURI().toString());
+        icon_profile.setImage(brandingImage);
+
+        brandingFile = new File ("src/resources/icons/logo_blue.png");
+        brandingImage = new Image(brandingFile.toURI().toString());
+        logo_blue.setImage(brandingImage);
+    }
 
     public void addTab(ActionEvent e) {
         Tab tab = new Tab();
@@ -77,7 +120,7 @@ public class EnigmaUIController {
             fileList.remove(index);
         });
 
-        CustomCodeArea codeArea = new CustomCodeArea();
+        enigma.CustomCodeArea codeArea = new enigma.CustomCodeArea();
 
         tab.setClosable(true);
         tab.setContent(codeArea);
@@ -98,7 +141,7 @@ public class EnigmaUIController {
             fileList.remove(index);
         });
 
-        CustomCodeArea codeArea = new CustomCodeArea();
+        enigma.CustomCodeArea codeArea = new enigma.CustomCodeArea();
 
         try {
             Scanner scanner = new Scanner(fileList.get(fileList.size() - 1));
@@ -258,5 +301,14 @@ public class EnigmaUIController {
             System.out.println(output);
             System.out.println(exitVal);
         }
+    }
+    public void profileOnAction(ActionEvent event) throws IOException {
+// going to login page
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
