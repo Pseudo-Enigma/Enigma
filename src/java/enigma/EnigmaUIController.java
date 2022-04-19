@@ -11,19 +11,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
-import org.fxmisc.richtext.model.StyleSpans;
-import org.fxmisc.richtext.model.StyleSpansBuilder;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import enigma.Highlighter;
 
 public class EnigmaUIController {
 
@@ -40,12 +33,12 @@ public class EnigmaUIController {
 
 
         CodeArea codeArea = new CodeArea();
-        Highlighter highlighter = new Highlighter();
+//        Highlighter highlighter = new Highlighter();
 
         // Line numbers
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
         // Folding / Unfolding / Printing
-        codeArea.setContextMenu( new DefaultContextMenu());
+ //       codeArea.setContextMenu( new DefaultContextMenu());
 
 //        codeArea.getVisibleParagraphs().addModificationObserver
 //                (
@@ -76,7 +69,7 @@ public class EnigmaUIController {
         fileList.add(fileChooser.showSaveDialog(new Stage()));
 
         Tab tab = new Tab();
-        closeLanding();
+        //closeLanding();
         tab.setText(fileList.get(fileList.size() - 1).getName());
 
         tab.setOnCloseRequest(event -> {
@@ -97,7 +90,7 @@ public class EnigmaUIController {
         fileList.add(fileChooser.showOpenDialog(new Stage()));
 
         Tab tab = new Tab();
-        closeLanding();
+       // closeLanding();
         tab.setText(fileList.get(fileList.size() - 1).getName());
 
         tab.setOnCloseRequest(event -> {
@@ -154,9 +147,116 @@ public class EnigmaUIController {
         }
     }
 
-    public void closeLanding() {
-        if (tabPane.getTabs().get(0).getId() == "welcome") {
-            tabPane.getTabs().remove(0);
+//    public void closeLanding() {
+//        if (tabPane.getTabs().get(0).getId() == "welcome") {
+//            tabPane.getTabs().remove(0);
+//        }
+//    }
+
+    public void compile() throws IOException, InterruptedException {
+        int index = tabPane.getSelectionModel().getSelectedIndex();
+        String name = fileList.get(index).getName();
+        String path = fileList.get(index).getParent();
+        String nameOnly = "";
+        String extension = "";
+
+
+        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+
+        if (name.lastIndexOf(".") != -1 && name.lastIndexOf(".") != 0)
+        {
+            extension = name.substring(name.lastIndexOf(".") + 1);
+        }
+
+        if (name.lastIndexOf(".") > 0) {
+            nameOnly = name.substring(0,name.lastIndexOf("."));
+        }
+        else nameOnly = name;
+
+        System.out.println("Names extracted");
+        System.out.println(name);
+        System.out.println(path);
+        System.out.println(extension);
+        System.out.println(nameOnly);
+        System.out.println(isWindows);
+
+        if (extension.equals("java")) {
+            String[] commands1 = {"javac", name};
+            String[] commands2 = {"java", nameOnly};
+
+            ProcessBuilder builder1 = new ProcessBuilder(commands1);
+            ProcessBuilder builder2 = new ProcessBuilder(commands2);
+            builder1.directory(new File(path));
+            builder2.directory(new File(path));
+            builder1.start();
+
+            Process process = builder2.start();
+
+            StringBuilder output = new StringBuilder();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                output.append(line + "\n");
+            }
+
+            int exitVal = process.waitFor();
+            System.out.println("Success");
+            System.out.println(output);
+            System.out.println("Exit value" + exitVal);
+        }
+
+        else if (extension.equals("cpp")) {
+
+//            String command1 = "cd " + path + "; ";
+//            String command2 = "g++ " + path + "/" + name + " -o " + nameOnly;
+//
+//            System.out.println(command1 + command2);
+//            Runtime.getRuntime().exec(command1 + command2);
+
+            //String[] command = {"sh", "-c","g++", path + "/" + name, " - o", nameOnly};
+            String[] command1 = {"g++", name, "-o", nameOnly};
+            //String[] command2 = {"./", nameOnly};
+            ProcessBuilder builder1 = new ProcessBuilder(command1);
+            //ProcessBuilder builder2 = new ProcessBuilder(command2);
+
+            System.out.println("First process done");
+
+            builder1.directory(new File(path));
+            //builder2.directory(new File(path));
+
+            builder1.start();
+
+            Process process = Runtime.getRuntime().exec(path + "/" + nameOnly);
+
+            System.out.println("Final Process done");
+//            Process process = null;
+//            if (isWindows)
+//                process = Runtime.getRuntime().exec(path + "/" + nameOnly + ".exe");
+//            else
+//                process = Runtime.getRuntime().exec(path + "/" + nameOnly);
+//
+//            System.out.println("process called");
+
+            StringBuilder output = new StringBuilder();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                output.append(line + "\n");
+            }
+
+            System.out.println("String built");
+            int exitVal = process.waitFor();
+
+            System.out.println(exitVal);
+            System.out.println("Success");
+            System.out.println(output);
+            System.out.println(exitVal);
         }
     }
 }
