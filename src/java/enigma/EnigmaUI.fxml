@@ -27,7 +27,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Save" />
                   <MenuItem mnemonicParsing="false" onAction="#saveFileAs" text="Save As..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="opt_close" mnemonicParsing="false" onAction="#opt_closeOnAction" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -39,34 +39,34 @@
       </MenuBar>
    </top>
    <center>
-      <TabPane fx:id="tabPane" prefHeight="572.0" prefWidth="537.0" BorderPane.alignment="CENTER">
+      <TabPane fx:id="tabPane" prefHeight="573.0" prefWidth="660.0" BorderPane.alignment="CENTER">
          <tabs>
             <Tab fx:id="welcome" text="Welcome">
                <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                  <BorderPane fx:id="bp_landing" prefHeight="200.0" prefWidth="1009.0">
                      <left>
                         <AnchorPane prefHeight="542.0" prefWidth="308.0" BorderPane.alignment="CENTER">
                            <children>
                               <ImageView fx:id="logo_blue" fitHeight="223.0" fitWidth="224.0" layoutX="42.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@icons/logo_blue.png" />
+                                    <Image url="@../../resources/icons/logo_blue.png" />
                                  </image></ImageView>
                            </children>
                         </AnchorPane>
                      </left>
-                     <right>
-                        <AnchorPane prefHeight="542.0" prefWidth="610.0" style="-fx-background-color: #286090;" BorderPane.alignment="CENTER">
+                     <center>
+                        <AnchorPane prefHeight="542.0" prefWidth="780.0" style="-fx-background-color: #286090;" BorderPane.alignment="CENTER">
                            <children>
-                              <Button layoutX="121.0" layoutY="237.0" mnemonicParsing="false" onAction="#newFile" prefHeight="49.0" prefWidth="129.0" text="New File" textAlignment="CENTER" />
-                              <Text fill="WHITE" layoutX="59.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Developing!" textAlignment="CENTER" wrappingWidth="253.0">
+                              <Button layoutX="145.0" layoutY="235.0" mnemonicParsing="false" onAction="#newFile" prefHeight="49.0" prefWidth="129.0" text="New File" textAlignment="CENTER" />
+                              <Text fill="WHITE" layoutX="83.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Developing!" textAlignment="CENTER" wrappingWidth="253.0">
                                  <font>
                                     <Font name="System Bold" size="29.0" />
                                  </font>
                               </Text>
-                              <Button layoutX="121.0" layoutY="311.0" mnemonicParsing="false" onAction="#openFile" prefHeight="49.0" prefWidth="129.0" text="Open File" textAlignment="CENTER" />
+                              <Button layoutX="145.0" layoutY="303.0" mnemonicParsing="false" onAction="#openFile" prefHeight="49.0" prefWidth="129.0" text="Open File" textAlignment="CENTER" />
                            </children>
                         </AnchorPane>
-                     </right>
+                     </center>
                   </BorderPane>
                </content>
             </Tab>
@@ -74,45 +74,55 @@
       </TabPane>
    </center>
    <left>
-      <HBox prefHeight="572.0" prefWidth="134.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="573.0" prefWidth="66.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="572.0" prefWidth="218.0">
+            <VBox prefHeight="573.0" prefWidth="53.0">
                <children>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="107.0" prefWidth="156.0">
+                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="78.0" prefWidth="78.0">
                      <graphic>
-                        <ImageView fx:id="icon_file" fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="icon_file" fitHeight="48.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/icon_file.png" />
+                              <Image url="@../../resources/icons/icon_file.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="107.0" prefWidth="156.0">
+                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="78.0">
                      <graphic>
-                        <ImageView fx:id="icon_search" fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="icon_search" fitHeight="37.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/icon_search.png" />
+                              <Image url="@../../resources/icons/icon_search.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onAction="#compile" prefHeight="107.0" prefWidth="156.0">
+                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onAction="#compile" prefHeight="78.0" prefWidth="78.0">
                      <graphic>
-                        <ImageView fx:id="icon_run" fitHeight="57.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="icon_run" fitHeight="51.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/icon_run.png" />
+                              <Image url="@../../resources/icons/icon_run.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="btn_profile" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="224.0" mnemonicParsing="false" onAction="#profileOnAction" prefHeight="107.0" prefWidth="156.0">
+                  <Button fx:id="btn_profile" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="224.0" mnemonicParsing="false" onAction="#profileOnAction" prefHeight="79.0" prefWidth="78.0">
                      <graphic>
-                        <ImageView fx:id="icon_profile" fitHeight="64.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="icon_profile" fitHeight="32.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/icon_profile.png" />
+                              <Image url="@../../resources/icons/icon_profile.png" />
                            </image>
                         </ImageView>
-                     </graphic></Button>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btn_mode" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="244.0" mnemonicParsing="false" onAction="#modeOnAction" prefHeight="79.0" prefWidth="78.0" stylesheets="@../resources/css/light.css">
+                     <graphic>
+                        <ImageView fx:id="icon_profile1" fitHeight="35.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/icons/icon_mode.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </VBox>
          </children>

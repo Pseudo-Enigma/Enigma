@@ -8,12 +8,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.fxmisc.richtext.CodeArea;
@@ -28,6 +31,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EnigmaUIController implements Initializable {
+    public boolean isLoggedIn;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -44,7 +48,16 @@ public class EnigmaUIController implements Initializable {
     @FXML
     public ImageView icon_profile;
     @FXML
+    public ImageView icon_mode;
+    @FXML
     public ImageView logo_blue;
+    @FXML
+    private MenuItem opt_close;
+    private boolean islightmode;
+    @FXML
+    private BorderPane bp_landing;
+
+    public String username;
 
     ArrayList<File> fileList = new ArrayList<>();
 
@@ -65,9 +78,20 @@ public class EnigmaUIController implements Initializable {
         brandingImage = new Image(brandingFile.toURI().toString());
         icon_profile.setImage(brandingImage);
 
+        brandingFile = new File ("src/resources/icons/icon_mode.png");
+        brandingImage = new Image(brandingFile.toURI().toString());
+        icon_mode.setImage(brandingImage);
+
         brandingFile = new File ("src/resources/icons/logo_blue.png");
         brandingImage = new Image(brandingFile.toURI().toString());
         logo_blue.setImage(brandingImage);
+
+        brandingFile = new File ("src/resources/icons/logo_blue.png");
+        brandingImage = new Image(brandingFile.toURI().toString());
+        logo_blue.setImage(brandingImage);
+
+        islightmode=true;
+        isLoggedIn = false;
     }
 
     public void addTab(ActionEvent e) {
@@ -300,15 +324,71 @@ public class EnigmaUIController implements Initializable {
             System.out.println("Success");
             System.out.println(output);
             System.out.println(exitVal);
+
+            Stage stage = new Stage();
+            TextArea textArea = new TextArea();
+            textArea.setText(output.toString());
+            Scene scene = new Scene(textArea, 400,400);
+            stage.setScene(scene);
+            stage.show();
         }
     }
     public void profileOnAction(ActionEvent event) throws IOException {
-// going to login page
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-        root = loader.load();
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        if (isLoggedIn) {
+            // going to profile page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/profile.fxml"));
+            root = loader.load();
+            profileController profController = loader.getController();
+//            System.out.println(username);
+            profController.getUsername(username);
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            // going to login page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
+
+    public void opt_closeOnAction (ActionEvent event) {
+        System.exit(0);
+//        tabPane.setW
+    }
+
+    public void modeOnAction()
+    {
+        islightmode=!islightmode;
+        if(islightmode)
+        {
+            setLightMode();
+        }
+        else
+        {
+            setDarkMode();
+        }
+    }
+    private void setLightMode()
+    {
+        bp_landing.getStylesheets().remove("src/resources/css/dark.css");
+        bp_landing.getStylesheets().add("src/resources/css/light.css");
+    }
+    private void setDarkMode()
+    {
+        bp_landing.getStylesheets().remove("src/resources/css/light.css");
+        bp_landing.getStylesheets().add("src/resources/css/dark.css");
+
+    }
+    public void getUsername(String name) {
+        username = name;
+    }
+    public void updateFlag(boolean flag)
+    {
+        isLoggedIn = flag;
     }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="182.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enigma.outputController">
+   <children>
+      <TextArea fx:id="ta_output" layoutX="12.0" layoutY="7.0" prefHeight="170.0" prefWidth="321.0" />
+   </children>
+</AnchorPane>

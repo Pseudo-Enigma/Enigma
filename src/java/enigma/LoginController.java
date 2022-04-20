@@ -33,6 +33,8 @@ public class LoginController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    public boolean flag = false;
     @FXML
     public Line line_r;
     @FXML
@@ -60,16 +62,15 @@ public class LoginController implements Initializable {
         Image brandingImage = new Image(brandingFile.toURI().toString());
         img_logoWhite.setImage(brandingImage);
         btn_login.setText("Sign In");
-        lbl_login.setTextFill(Paint.valueOf("#160786"));
+        lbl_login.setTextFill(Paint.valueOf("#286090"));
         line_l.setVisible(true);
         line_r.setVisible(false);
         lbl_register.setTextFill(Paint.valueOf("#111111"));
-
     }
 
     public void lbl_loginOnClink (MouseEvent event) {
         btn_login.setText("Sign In");
-        lbl_login.setTextFill(Paint.valueOf("#160786"));
+        lbl_login.setTextFill(Paint.valueOf("#286090"));
         line_l.setVisible(true);
         line_r.setVisible(false);
         lbl_register.setTextFill(Paint.valueOf("#111111"));
@@ -79,7 +80,7 @@ public class LoginController implements Initializable {
     }
     public void lbl_registerOnClink (MouseEvent event) {
         btn_login.setText("Sign Up");
-        lbl_register.setTextFill(Paint.valueOf("#160786"));
+        lbl_register.setTextFill(Paint.valueOf("#286090"));
         line_r.setVisible(true);
         line_l.setVisible(false);
         lbl_login.setTextFill(Paint.valueOf("#111111"));
@@ -87,10 +88,22 @@ public class LoginController implements Initializable {
         tf_username.setText("");
         pf_password.setText("");
     }
-    public void btn_loginOnAction (ActionEvent event) {
+    public void btn_loginOnAction (ActionEvent event) throws IOException {
         if (!tf_username.getText().isBlank() && !pf_password.getText().isBlank()) {
             if (btn_login.getText().toString().equals("Sign In")) {
-                validateSignIn();
+                if (validateSignIn())
+                {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("EnigmaUI.fxml"));
+                    root = loader.load();
+                    flag = true;
+                    EnigmaUIController enigmaUIController = loader.getController();
+                    enigmaUIController.updateFlag(flag);
+                    enigmaUIController.getUsername(tf_username.getText());
+                    stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                }
             } else {
                 validateSignUP();
             }
@@ -103,13 +116,16 @@ public class LoginController implements Initializable {
         //going to landing page
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EnigmaUI.fxml"));
         root = loader.load();
+        EnigmaUIController enigmaUIController = loader.getController();
+        enigmaUIController.updateFlag(flag);
+        enigmaUIController.getUsername(tf_username.getText());
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void validateSignIn() {
+    public boolean validateSignIn() {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
 
@@ -123,7 +139,8 @@ public class LoginController implements Initializable {
                 if(queryResult.getInt(1) == 1) {
                     lbl_messege.setText("login successful!");
                     lbl_messege.setAlignment(Pos.CENTER);
-
+                    flag = true;
+                    return true;
                 } else {
                     lbl_messege.setText("Invalid Username or Password!");
                     lbl_messege.setAlignment(Pos.CENTER);
@@ -133,6 +150,7 @@ public class LoginController implements Initializable {
             e.printStackTrace();
             e.getCause();
         }
+        return false;
     }
     public void validateSignUP() {
         DatabaseConnection connectNow = new DatabaseConnection();
