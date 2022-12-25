@@ -1,2 +1,2 @@
 # Enigma
-A collaborative IDE
+A Java IDE that can compile and run single Java programs.
